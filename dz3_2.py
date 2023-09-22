@@ -8,15 +8,14 @@ def gravitation(g,m1,m2,r):
 m1 = 5.97600 * math.pow(10,24)
 g = 6.6743 * math.pow(10,-11)
 
-names = ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune"]
+names = [["Mercury", "0.055", "77","202"],
+    ["Venus", "0.815", "38", "261"],
+    ["Mars", "0.107", "54","401"],
+    ["Jupiter","318", "628","928"],
+    ["Saturn", "95.2", "1200","1600"],
+    ["Uranus", "14.6", "2700","2900"],
+    ["Neptune","17.2","4300","4700"]]
 for i in range(len(names)):
-    api_url = 'https://api.api-ninjas.com/v1/planets?name={}'.format(names[i])
-    response = requests.get(api_url, headers={'X-Api-Key': 'KheDR2ri0bbd/gV+p6hYbw==oSusQjtDdgpQcZAE'})
-    if response.status_code == requests.codes.ok:
-        print(response.text)
-    else:
-        print("Error:", response.status_code, response.text)
-
-    m2 = 1.898*10**27 * float((response.text[response.text.find('mass')+7:response.text.find('mass')+13]))
-    r= float((response.text[response.text.find('year')+7:response.text.find('year')+15]))
-    print(names[i],'-',gravitation(g,m1,m2,r))
+    m2 = 5.97*10**24 * float(names[i][1])
+    r= (int(names[i][2])+int(names[i][3]))/2
+    print(names[i][0],'-',gravitation(g,m1,m2,r))
